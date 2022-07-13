@@ -8,6 +8,7 @@ using Exchange.Common.Classes;
 using Binance.Api.Services.Interfaces.Base;
 using Binance.Net.Objects.Models.Futures;
 using Exchange.Common.Services.Base;
+using Exchange.Common.StaticClasses;
 
 namespace Binance.Api.Services
 {
@@ -16,6 +17,8 @@ namespace Binance.Api.Services
         private readonly IBinanceBaseService _binanceBaseService;
         private readonly ISettingsRepository _settingsRepository;
         private readonly ILogger<BinanceSpotService> _logger;
+
+        public override string ExchangeName => ExchangeNames.BinanceSpot;
 
         public BinanceFuturesService(
             IBinanceBaseService binanceBaseService, 

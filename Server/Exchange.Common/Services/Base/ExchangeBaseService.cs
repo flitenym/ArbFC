@@ -6,6 +6,7 @@ namespace Exchange.Common.Services.Base
 {
     public abstract class ExchangeBaseService
     {
+        public abstract string ExchangeName { get; }
         /// <summary>
         /// Получение валют
         /// </summary>
