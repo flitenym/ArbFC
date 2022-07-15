@@ -12,5 +12,6 @@ namespace Storage.Module
 
         public DbSet<User> Users { get; set; }
         public DbSet<Settings> Settings { get; set; }
+        public DbSet<Exchange> Exchanges { get; set; }
     }
 }

@@ -18,19 +18,31 @@ namespace Storage.Module.Services
             if (_dataContext.Database.EnsureCreated())
             {
                 // базовые настройки
-                Settings binanceApiKey = new Settings()
+                Settings binanceApiKey = new ()
                 {
                     Key = SettingsKeys.BinanceApiKey,
                     Value = null
                 };
                 _dataContext.Add(binanceApiKey);
 
-                Settings binanceApiSecret = new Settings()
+                Settings binanceApiSecret = new ()
                 {
                     Key = SettingsKeys.BinanceApiSecret,
                     Value = null
                 };
                 _dataContext.Add(binanceApiSecret);
+
+                Exchange exchangeBinanceSpot = new()
+                {
+                    Name = ExchangeNames.BinanceSpot
+                };
+                _dataContext.Add(exchangeBinanceSpot);
+
+                Exchange exchangeBinanceFutures = new()
+                {
+                    Name = ExchangeNames.BinanceFutures
+                };
+                _dataContext.Add(exchangeBinanceFutures);
 
                 await _dataContext.SaveChangesAsync();
             }

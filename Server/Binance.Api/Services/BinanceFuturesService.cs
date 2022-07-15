@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using Storage.Module.Repositories.Interfaces;
 using System.Linq;
 using Exchange.Common.Classes;
-using Binance.Api.Services.Interfaces.Base;
 using Binance.Net.Objects.Models.Futures;
 using Exchange.Common.Services.Base;
-using Exchange.Common.StaticClasses;
+using Binance.Api.Services.Base.Interfaces;
+using Storage.Module.StaticClasses;
 
 namespace Binance.Api.Services
 {
@@ -18,7 +18,7 @@ namespace Binance.Api.Services
         private readonly ISettingsRepository _settingsRepository;
         private readonly ILogger<BinanceSpotService> _logger;
 
-        public override string ExchangeName => ExchangeNames.BinanceSpot;
+        public override string ExchangeName => ExchangeNames.BinanceFutures;
 
         public BinanceFuturesService(
             IBinanceBaseService binanceBaseService, 
@@ -34,24 +34,19 @@ namespace Binance.Api.Services
         {
             SettingsInfo settings = await _settingsRepository.GetSettingsAsync();
 
-            (bool isSuccessExchangeInfo, string messageExchangeInfo, BinanceFuturesCoinExchangeInfo spotExchangeInfo) =
+            (bool isSuccessExchangeInfo, string messageExchangeInfo, BinanceFuturesUsdtExchangeInfo exchangeInfo) =
                 await _binanceBaseService.GetFuturesExchangeInfoAsync(settings);
 
             if (!isSuccessExchangeInfo)
             {
+                _logger.LogTrace($"{nameof(BinanceFuturesService)}:{messageExchangeInfo}");
                 return (false, messageExchangeInfo, default);
             }
 
             return (true, default,
-                spotExchangeInfo
+                exchangeInfo
                 .Symbols
-                .Select(x =>
-                    new AssetInfo
-                    {
-                        FromAsset = x.BaseAsset,
-                        ToAsset = x.QuoteAsset
-                    }
-                )
+                .Select(x => new AssetInfo(x.BaseAsset, x.QuoteAsset))
             );
         }
     }

@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Storage.Module.Repositories;
 using Storage.Module.Repositories.Base;
+using Storage.Module.Repositories.Base.Interfaces;
 using Storage.Module.Repositories.Interfaces;
 using Storage.Module.Services;
 using Storage.Module.Services.Interfaces;
@@ -52,6 +53,8 @@ namespace Storage.Module.Extensions
         {
             services.AddScoped<IBaseRepository, BaseRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IExchangeRepository, ExchangeRepository>();
+            services.AddScoped<ISettingsRepository, SettingsRepository>();
         }
     }
 }

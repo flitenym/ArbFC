@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using Storage.Module.Repositories.Interfaces;
 using System.Linq;
 using Exchange.Common.Classes;
-using Binance.Api.Services.Interfaces.Base;
 using Exchange.Common.Services.Base;
-using Exchange.Common.StaticClasses;
+using Binance.Api.Services.Base.Interfaces;
+using Storage.Module.StaticClasses;
 
 namespace Binance.Api.Services
 {
@@ -34,24 +34,19 @@ namespace Binance.Api.Services
         {
             SettingsInfo settings = await _settingsRepository.GetSettingsAsync();
 
-            (bool isSuccessExchangeInfo, string messageExchangeInfo, BinanceExchangeInfo spotExchangeInfo) =
+            (bool isSuccessExchangeInfo, string messageExchangeInfo, BinanceExchangeInfo exchangeInfo) =
                 await _binanceBaseService.GetSpotExchangeInfoAsync(settings);
 
             if (!isSuccessExchangeInfo)
             {
+                _logger.LogTrace($"{nameof(BinanceSpotService)}:{messageExchangeInfo}");
                 return (false, messageExchangeInfo, default);
             }
 
             return (true, default,
-                spotExchangeInfo
+                exchangeInfo
                 .Symbols
-                .Select(x =>
-                    new AssetInfo
-                    {
-                        FromAsset = x.BaseAsset,
-                        ToAsset = x.QuoteAsset
-                    }
-                )
+                .Select(x => new AssetInfo(x.BaseAsset, x.QuoteAsset))
             );
         }
     }

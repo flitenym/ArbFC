@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Storage.Module.Classes;
 using Storage.Module.Entities;
 using Storage.Module.Localization;
+using Storage.Module.Repositories.Base.Interfaces;
 using Storage.Module.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;

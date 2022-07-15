@@ -1,4 +1,4 @@
-﻿namespace Exchange.Common.StaticClasses
+﻿namespace Storage.Module.StaticClasses
 {
     public static class ExchangeNames
     {

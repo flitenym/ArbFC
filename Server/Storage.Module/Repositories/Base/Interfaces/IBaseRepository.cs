@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Storage.Module.Repositories.Interfaces
+namespace Storage.Module.Repositories.Base.Interfaces
 {
     public interface IBaseRepository
     {

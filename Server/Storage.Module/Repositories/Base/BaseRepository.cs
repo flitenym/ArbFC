@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Storage.Module.Entities;
 using Storage.Module.Localization;
-using Storage.Module.Repositories.Interfaces;
+using Storage.Module.Repositories.Base.Interfaces;
 using System;
 using System.Linq;
 using System.Threading.Tasks;

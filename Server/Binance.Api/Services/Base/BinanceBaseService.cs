@@ -9,8 +9,8 @@ using Storage.Module.Classes;
 using Microsoft.Extensions.Logging;
 using Exchange.Common.Localization;
 using Storage.Module.Repositories.Interfaces;
-using Binance.Api.Services.Interfaces.Base;
 using Binance.Net.Objects.Models.Futures;
+using Binance.Api.Services.Base.Interfaces;
 
 namespace Binance.Api.Services.Base
 {
@@ -93,7 +93,7 @@ namespace Binance.Api.Services.Base
         /// <summary>
         /// Получение системной информации бинанса, включая минимальные значения по валютам
         /// </summary>
-        public async Task<(bool IsSuccess, string Message, BinanceFuturesCoinExchangeInfo ExchangeInfo)> GetFuturesExchangeInfoAsync(SettingsInfo settings)
+        public async Task<(bool IsSuccess, string Message, BinanceFuturesUsdtExchangeInfo ExchangeInfo)> GetFuturesExchangeInfoAsync(SettingsInfo settings)
         {
             var client = GetBinanceClient(settings);
 
@@ -102,7 +102,7 @@ namespace Binance.Api.Services.Base
                 return (false, client.Message, null);
             }
 
-            var result = await client.client.CoinFuturesApi.ExchangeData.GetExchangeInfoAsync();
+            var result = await client.client.UsdFuturesApi.ExchangeData.GetExchangeInfoAsync();
 
             (bool isSuccessStatus, string messageStatus) = CheckStatus(result);
 
