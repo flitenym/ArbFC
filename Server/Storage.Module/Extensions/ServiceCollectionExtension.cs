@@ -52,9 +52,13 @@ namespace Storage.Module.Extensions
         public static void AddStorageRepositoryServices(this IServiceCollection services)
         {
             services.AddScoped<IBaseRepository, BaseRepository>();
-            services.AddScoped<IUserRepository, UserRepository>();
+
+            services.AddScoped<IChainRepository, ChainRepository>();
+            services.AddScoped<IExchangeChainRepository, ExchangeChainRepository>();
             services.AddScoped<IExchangeRepository, ExchangeRepository>();
             services.AddScoped<ISettingsRepository, SettingsRepository>();
+            services.AddScoped<ITickerRepository, TickerRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
         }
     }
 }

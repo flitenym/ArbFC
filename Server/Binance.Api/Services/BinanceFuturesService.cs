@@ -9,6 +9,7 @@ using Binance.Net.Objects.Models.Futures;
 using Exchange.Common.Services.Base;
 using Binance.Api.Services.Base.Interfaces;
 using Storage.Module.StaticClasses;
+using Exchange.Common.StaticClasses;
 
 namespace Binance.Api.Services
 {
@@ -46,6 +47,7 @@ namespace Binance.Api.Services
             return (true, default,
                 exchangeInfo
                 .Symbols
+                .Where(x => ExchangeCurrencies.ToAssetCurrencies.Contains(x.QuoteAsset))
                 .Select(x => new AssetInfo(x.BaseAsset, x.QuoteAsset))
             );
         }
