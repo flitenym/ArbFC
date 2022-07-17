@@ -44,11 +44,15 @@ namespace Storage.Module.Repositories
         {
             NotificationSound notificationSound = new();
 
-            notificationSound.FileName = Path.GetFileNameWithoutExtension(notificationSoundDTO.FileName);
-            notificationSound.FileExtension = Path.GetExtension(notificationSoundDTO.FileName);
+            notificationSound.FileName = Path.GetFileNameWithoutExtension(notificationSoundDTO.File.FileName);
+            notificationSound.FileExtension = Path.GetExtension(notificationSoundDTO.File.FileName);
 
             FileContent content = new();
-            content.Content = notificationSoundDTO.FileContent;
+            using (var memoryStream = new MemoryStream())
+            {
+                notificationSoundDTO.File.CopyTo(memoryStream);
+                content.Content = memoryStream.ToArray();
+            }
 
             notificationSound.FileContent = content;
 

@@ -198,4 +198,7 @@
   <data name="ImportNoFile" xml:space="preserve">
     <value>Неудалось получить файл.</value>
   </data>
+  <data name="EmptyValue" xml:space="preserve">
+    <value>Значение у поля {0} не верно.</value>
+  </data>
 </root>

@@ -1,4 +1,5 @@
 ﻿using Storage.Module.Classes;
+using Storage.Module.Localization;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,17 +16,49 @@ namespace Storage.Module.Controllers.DTO
         public long TwentyFourHoursVolume { get; set; }
         public long? NotificationSoundId { get; set; }
 
-        public bool IsValid()
+        public (bool IsSuccess, string Message) IsValid()
         {
-            return
-                UserId != 0 &&
-                ExchangeIds != null && ExchangeIds.Any() &&
-                Assets != null &&
-                !string.IsNullOrEmpty(SRGB) &&
-                NotificationSoundId != 0 &&
-                Difference != 0 &&
-                RefreshTime > 10 &&
-                TwentyFourHoursVolume >= 0;
+            if (UserId == 0)
+            {
+                return (false, string.Format(StorageLoc.EmptyValue, nameof(UserId)));
+            }
+
+            if (ExchangeIds == null || !ExchangeIds.Any())
+            {
+                return (false, string.Format(StorageLoc.EmptyValue, nameof(ExchangeIds)));
+            }
+
+            if (Assets == null)
+            {
+                return (false, string.Format(StorageLoc.EmptyValue, nameof(Assets)));
+            }
+
+            if (string.IsNullOrEmpty(SRGB))
+            {
+                return (false, string.Format(StorageLoc.EmptyValue, nameof(SRGB)));
+            }
+
+            if (NotificationSoundId == 0)
+            {
+                return (false, string.Format(StorageLoc.EmptyValue, nameof(NotificationSoundId)));
+            }
+
+            if (Difference == 0)
+            {
+                return (false, string.Format(StorageLoc.EmptyValue, nameof(Difference)));
+            }
+
+            if (RefreshTime < 10)
+            {
+                return (false, string.Format(StorageLoc.EmptyValue, nameof(RefreshTime)));
+            }
+
+            if (TwentyFourHoursVolume < 0)
+            {
+                return (false, string.Format(StorageLoc.EmptyValue, nameof(TwentyFourHoursVolume)));
+            }
+
+            return (true, default);
         }
     }
 }

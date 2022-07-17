@@ -4,7 +4,6 @@ using Microsoft.Extensions.Logging;
 using Storage.Module.Controllers.Base;
 using Storage.Module.Controllers.DTO;
 using Storage.Module.Entities;
-using Storage.Module.Localization;
 using Storage.Module.Repositories.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -33,9 +32,11 @@ namespace Storage.Module.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateAsync(ChainDTO chainDTO)
         {
-            if (!chainDTO.IsValid())
+            (bool isValid, string validMessage) = chainDTO.IsValid();
+
+            if (!isValid)
             {
-                return BadRequest(StorageLoc.Empty);
+                return BadRequest(validMessage);
             }
 
             return StringToResult(

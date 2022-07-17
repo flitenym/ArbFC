@@ -198,4 +198,7 @@
   <data name="ImportNoFile" xml:space="preserve">
     <value>Failed to get file.</value>
   </data>
+  <data name="EmptyValue" xml:space="preserve">
+    <value>The value of the field {0} is not correct.</value>
+  </data>
 </root>

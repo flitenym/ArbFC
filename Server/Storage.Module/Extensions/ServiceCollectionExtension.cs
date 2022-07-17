@@ -56,6 +56,7 @@ namespace Storage.Module.Extensions
             services.AddScoped<IChainRepository, ChainRepository>();
             services.AddScoped<IExchangeChainRepository, ExchangeChainRepository>();
             services.AddScoped<IExchangeRepository, ExchangeRepository>();
+            services.AddScoped<INotificationSoundRepository, NotificationSoundRepository>();
             services.AddScoped<ISettingsRepository, SettingsRepository>();
             services.AddScoped<ITickerRepository, TickerRepository>();
             services.AddScoped<IUserRepository, UserRepository>();

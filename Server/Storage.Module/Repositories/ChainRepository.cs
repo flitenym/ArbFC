@@ -43,14 +43,27 @@ namespace Storage.Module.Repositories
 
             // установим цвет
             chain.SRGB = chainDTO.SRGB;
+            chain.Difference = chainDTO.Difference;
+            chain.RefreshTime = chainDTO.RefreshTime;
+            chain.TwentyFourHoursVolume = chainDTO.TwentyFourHoursVolume;
 
             // получим пользователя
             User user = await _dataContext.Users.FirstOrDefaultAsync(x => x.Id == chainDTO.UserId);
+            if (user == null)
+            {
+                return (false, $"Не найден пользователь {chainDTO.UserId}.");
+            }
+
             chain.User = user;
             _dataContext.Attach(user);
 
             // получим звук уведомления 
             NotificationSound notificationSound = await _dataContext.NotificationSounds.FirstOrDefaultAsync(x => x.Id == chainDTO.NotificationSoundId);
+            if (notificationSound == null)
+            {
+                return (false, $"Не найден звук уведомления {chainDTO.NotificationSoundId}.");
+            }
+
             chain.NotificationSound = notificationSound;
 
             // получим список из exchange
@@ -61,6 +74,11 @@ namespace Storage.Module.Repositories
                 ExchangeChain exchangeChain = new();
 
                 Exchange exchange = await _dataContext.Exchanges.FirstOrDefaultAsync(x => x.Id == chainDTO.ExchangeIds.ElementAt(i));
+                if (notificationSound == null)
+                {
+                    return (false, $"Не найдена биржа {chainDTO.ExchangeIds.ElementAt(i)}.");
+                }
+
                 exchangeChain.Order = i;
                 exchangeChain.Exchange = exchange;
                 _dataContext.Attach(exchange);
