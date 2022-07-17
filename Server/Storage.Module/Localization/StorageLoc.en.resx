@@ -121,7 +121,7 @@
     <value>An empty entity has been sent.</value>
   </data>
   <data name="CanNotExecute" xml:space="preserve">
-    <value>Failed to execute: {0}.</value>
+    <value>Failed to execute: {0}</value>
   </data>
   <data name="IncorrectLoginOrPassword" xml:space="preserve">
     <value>The username or password is incorrect.</value>

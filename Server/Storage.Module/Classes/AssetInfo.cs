@@ -1,4 +1,4 @@
-﻿namespace Exchange.Common.Classes
+﻿namespace Storage.Module.Classes
 {
     public record AssetInfo
     {

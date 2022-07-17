@@ -121,7 +121,7 @@
     <value>Отправлена пустая сущность.</value>
   </data>
   <data name="CanNotExecute" xml:space="preserve">
-    <value>Не удалось выполнить: {0}.</value>
+    <value>Не удалось выполнить: {0}</value>
   </data>
   <data name="IncorrectLoginOrPassword" xml:space="preserve">
     <value>Неверно указаны логин или пароль.</value>

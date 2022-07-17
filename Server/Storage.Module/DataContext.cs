@@ -16,5 +16,7 @@ namespace Storage.Module
         public DbSet<Chain> Chains { get; set; }
         public DbSet<ExchangeChain> ExchangeChains { get; set; }
         public DbSet<Ticker> Tickers { get; set; }
+        public DbSet<NotificationSound> NotificationSounds { get; set; }
+        public DbSet<FileContent> FileContents { get; set; }
     }
 }

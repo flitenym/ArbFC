@@ -44,6 +44,13 @@ namespace Storage.Module.Services
                 };
                 _dataContext.Add(exchangeBinanceFutures);
 
+                User admin = new()
+                {
+                    UserName = "admin",
+                    Password = "admin"
+                };
+                _dataContext.Add(admin);
+
                 await _dataContext.SaveChangesAsync();
             }
         }

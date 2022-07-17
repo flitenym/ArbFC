@@ -2,11 +2,10 @@
 
 namespace Storage.Module.Entities
 {
-    public class Ticker
+    public class FileContent
     {
         [Key]
         public long Id { get; set; }
-        public string ToAsset { get; set; }
-        public string FromAsset { get; set; }
+        public byte[] Content { get; set; }
     }
 }

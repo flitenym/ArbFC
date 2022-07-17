@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Storage.Module.Entities;
 using Storage.Module.Repositories.Base.Interfaces;
 using Storage.Module.Repositories.Interfaces;
@@ -26,6 +27,7 @@ namespace Storage.Module.Repositories
         {
             return _dataContext
                 .ExchangeChains
+                .Include(x => x.Exchange)
                 .OrderBy(x => x.Id);
         }
 

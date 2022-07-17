@@ -1,15 +1,14 @@
-﻿using System.Threading.Tasks;
+﻿using Binance.Api.Services.Base.Interfaces;
 using Binance.Net.Objects.Models.Spot;
-using Storage.Module.Classes;
-using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
-using Storage.Module.Repositories.Interfaces;
-using System.Linq;
-using Exchange.Common.Classes;
 using Exchange.Common.Services.Base;
-using Binance.Api.Services.Base.Interfaces;
-using Storage.Module.StaticClasses;
 using Exchange.Common.StaticClasses;
+using Microsoft.Extensions.Logging;
+using Storage.Module.Classes;
+using Storage.Module.Repositories.Interfaces;
+using Storage.Module.StaticClasses;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Binance.Api.Services
 {

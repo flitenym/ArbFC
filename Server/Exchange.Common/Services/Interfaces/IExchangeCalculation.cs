@@ -1,5 +1,5 @@
-﻿using Exchange.Common.Classes;
-using Exchange.Common.Services.Base;
+﻿using Exchange.Common.Services.Base;
+using Storage.Module.Classes;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

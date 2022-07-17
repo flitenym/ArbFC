@@ -2,9 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Storage.Module.Controllers.Base;
+using Storage.Module.Controllers.DTO;
 using Storage.Module.Entities;
+using Storage.Module.Localization;
 using Storage.Module.Repositories.Interfaces;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Storage.Module.Controllers
 {
@@ -25,6 +28,20 @@ namespace Storage.Module.Controllers
         public IEnumerable<Chain> Get()
         {
             return _chainRepository.Get();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateAsync(ChainDTO chainDTO)
+        {
+            if (!chainDTO.IsValid())
+            {
+                return BadRequest(StorageLoc.Empty);
+            }
+
+            return StringToResult(
+                await _chainRepository
+                .CreateAsync(chainDTO)
+            );
         }
     }
 }

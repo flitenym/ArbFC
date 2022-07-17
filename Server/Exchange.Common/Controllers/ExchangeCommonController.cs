@@ -1,9 +1,9 @@
-﻿using Exchange.Common.Classes;
-using Exchange.Common.Services.Base;
+﻿using Exchange.Common.Services.Base;
 using Exchange.Common.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Storage.Module.Classes;
 using Storage.Module.Controllers.Base;
 using Storage.Module.Localization;
 using Storage.Module.Repositories.Interfaces;
