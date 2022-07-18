@@ -12,7 +12,6 @@ namespace Storage.Module.Controllers.DTO
         public IEnumerable<AssetInfo> Assets { get; set; }
         public string SRGB { get; set; }
         public int Difference { get; set; }
-        public int RefreshTime { get; set; }
         public long TwentyFourHoursVolume { get; set; }
         public long? NotificationSoundId { get; set; }
 
@@ -46,11 +45,6 @@ namespace Storage.Module.Controllers.DTO
             if (Difference == 0)
             {
                 return (false, string.Format(StorageLoc.EmptyValue, nameof(Difference)));
-            }
-
-            if (RefreshTime < 10)
-            {
-                return (false, string.Format(StorageLoc.EmptyValue, nameof(RefreshTime)));
             }
 
             if (TwentyFourHoursVolume < 0)

@@ -37,6 +37,37 @@ namespace Storage.Module.Repositories
             .OrderBy(x => x.Id);
         }
 
+        public async Task<Chain> GetByIdAsync(long id)
+        {
+            return await _dataContext
+            .Chains
+            .Include(x => x.ExchangeChains)
+                .ThenInclude(x => x.Exchange)
+            .Include(x => x.Tickers)
+            .Include(x => x.NotificationSound)
+            .FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task<IEnumerable<Chain>> GetByUserIdAsync(long userId)
+        {
+            List<long> chainIds =
+                await _dataContext
+                .Chains
+                .Include(x => x.User)
+                .Where(x => x.User.Id == userId)
+                .Select(x => x.Id)
+                .ToListAsync();
+
+            return _dataContext
+                .Chains
+                .Include(x => x.ExchangeChains)
+                    .ThenInclude(x => x.Exchange)
+                .Include(x => x.Tickers)
+                .Include(x => x.NotificationSound)
+                .Where(x => chainIds.Contains(x.Id))
+                .OrderBy(x => x.Id);
+        }
+
         public async Task<(bool IsSuccess, string Message)> CreateAsync(ChainDTO chainDTO)
         {
             Chain chain = new();
@@ -44,7 +75,6 @@ namespace Storage.Module.Repositories
             // установим цвет
             chain.SRGB = chainDTO.SRGB;
             chain.Difference = chainDTO.Difference;
-            chain.RefreshTime = chainDTO.RefreshTime;
             chain.TwentyFourHoursVolume = chainDTO.TwentyFourHoursVolume;
 
             // получим пользователя

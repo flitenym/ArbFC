@@ -29,6 +29,18 @@ namespace Storage.Module.Controllers
             return _chainRepository.Get();
         }
 
+        [HttpGet("{id}")]
+        public async Task<Chain> GetByIdAsync(long id)
+        {
+            return await _chainRepository.GetByIdAsync(id);
+        }
+
+        [HttpGet("get_by_userId/{userId}")]
+        public async Task<IEnumerable<Chain>> GetByUserIdAsync(long userId)
+        {
+            return await _chainRepository.GetByUserIdAsync(userId);
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateAsync(ChainDTO chainDTO)
         {

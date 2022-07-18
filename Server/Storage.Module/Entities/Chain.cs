@@ -19,10 +19,6 @@ namespace Storage.Module.Entities
         /// </summary>
         public int Difference { get; set; }
         /// <summary>
-        /// Время обработки
-        /// </summary>
-        public int RefreshTime { get; set; }
-        /// <summary>
         /// 24h vol
         /// </summary>
         public long TwentyFourHoursVolume { get; set; }

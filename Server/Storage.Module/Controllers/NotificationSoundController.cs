@@ -31,7 +31,7 @@ namespace Storage.Module.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<FileContentResult> GetFile(long id)
+        public async Task<FileContentResult> GetFileAsync(long id)
         {
             NotificationSound notificationSound = await _notificationSoundRepository.GetByIdAsync(id);
             if (new FileExtensionContentTypeProvider().TryGetContentType(notificationSound.FileExtension, out var contentType))
