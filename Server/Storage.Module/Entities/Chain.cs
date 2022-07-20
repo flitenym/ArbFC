@@ -23,6 +23,10 @@ namespace Storage.Module.Entities
         /// </summary>
         public long TwentyFourHoursVolume { get; set; }
         /// <summary>
+        /// Включен
+        /// </summary>
+        public bool IsEnabled { get; set; } = true;
+        /// <summary>
         /// Выбранное уведомление
         /// </summary>
         public NotificationSound NotificationSound { get; set; }

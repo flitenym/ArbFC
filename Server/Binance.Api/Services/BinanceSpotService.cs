@@ -30,7 +30,7 @@ namespace Binance.Api.Services
             _logger = logger;
         }
 
-        public override async Task<(bool IsSuccess, string Message, IEnumerable<AssetInfo> Currencies)> GetCurrenciesAsync()
+        public override async Task<(bool IsSuccess, string Message, IEnumerable<TickerInfo> TickersInfo)> GetTickersAsync()
         {
             SettingsInfo settings = await _settingsRepository.GetSettingsAsync();
 
@@ -46,8 +46,8 @@ namespace Binance.Api.Services
             return (true, default,
                 exchangeInfo
                 .Symbols
-                .Where(x => ExchangeCurrencies.ToAssetCurrencies.Contains(x.QuoteAsset))
-                .Select(x => new AssetInfo(x.BaseAsset, x.QuoteAsset))
+                .Where(x => ExchangeTickers.ToTickers.Contains(x.QuoteAsset))
+                .Select(x => new TickerInfo(x.BaseAsset, x.QuoteAsset))
             );
         }
     }

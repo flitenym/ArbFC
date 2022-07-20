@@ -7,6 +7,6 @@ namespace Exchange.Common.Services.Interfaces
 {
     public interface IExchangeCalculation
     {
-        public Task<(bool IsSuccess, string Message, IEnumerable<AssetInfo>)> GetInterceptCurrenciesAsync(IEnumerable<ExchangeBaseService> exchangeServices);
+        public Task<(bool IsSuccess, string Message, IEnumerable<TickerInfo> TickersInfo)> GetInterceptTickersAsync(IEnumerable<ExchangeBaseService> exchangeServices);
     }
 }

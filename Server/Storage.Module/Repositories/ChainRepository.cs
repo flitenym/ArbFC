@@ -76,6 +76,7 @@ namespace Storage.Module.Repositories
             chain.SRGB = chainDTO.SRGB;
             chain.Difference = chainDTO.Difference;
             chain.TwentyFourHoursVolume = chainDTO.TwentyFourHoursVolume;
+            chain.IsEnabled = chainDTO.IsEnabled;
 
             // получим пользователя
             User user = await _dataContext.Users.FirstOrDefaultAsync(x => x.Id == chainDTO.UserId);
@@ -119,14 +120,14 @@ namespace Storage.Module.Repositories
             // создадим выбранные тикеры
             List<Ticker> tickers = new();
 
-            foreach (AssetInfo asset in chainDTO.Assets)
+            foreach (TickerInfo ticker in chainDTO.Tickers)
             {
-                Ticker ticker = new();
+                Ticker newTicker = new();
 
-                ticker.ToAsset = asset.ToAsset;
-                ticker.FromAsset = asset.FromAsset;
+                newTicker.ToTicker = ticker.ToTicker;
+                newTicker.FromTicker = ticker.FromTicker;
 
-                tickers.Add(ticker);
+                tickers.Add(newTicker);
             }
 
 

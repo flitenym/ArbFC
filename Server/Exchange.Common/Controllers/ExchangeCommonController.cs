@@ -34,13 +34,15 @@ namespace Exchange.Common.Controllers
             _logger = logger;
         }
 
-        [HttpGet("get_currencies")]
-        public async Task<IActionResult> GetCurrenciesAsync([FromBody] IEnumerable<long> ids)
+        [HttpPost("get_tickers")]
+        public async Task<IActionResult> GetTickersAsync([FromBody] IEnumerable<long> ids)
         {
             if (ids == null || !ids.Any())
             {
                 return BadRequest(StorageLoc.EmptyValues);
             }
+
+            ids = ids.Distinct();
 
             IEnumerable<Storage.Module.Entities.Exchange> exchanges = _exchangeRepository.GetByIds(ids);
 
@@ -48,15 +50,15 @@ namespace Exchange.Common.Controllers
 
             IEnumerable<ExchangeBaseService> exchangeServices = _exchangeServices.Where(x => exchangeNames.Contains(x.ExchangeName));
 
-            (bool isSuccessGetInterceptCurrencies, string messageGetInterceptCurrencies, IEnumerable<AssetInfo> assets) =
-                await _exchangeCalculation.GetInterceptCurrenciesAsync(exchangeServices);
+            (bool isSuccessGetInterceptTickers, string messageGetInterceptTickers, IEnumerable<TickerInfo> tickers) =
+                await _exchangeCalculation.GetInterceptTickersAsync(exchangeServices);
 
-            if (!isSuccessGetInterceptCurrencies)
+            if (!isSuccessGetInterceptTickers)
             {
-                return BadRequest(messageGetInterceptCurrencies);
+                return BadRequest(messageGetInterceptTickers);
             }
 
-            return Ok(assets);
+            return Ok(tickers);
         }
     }
 }

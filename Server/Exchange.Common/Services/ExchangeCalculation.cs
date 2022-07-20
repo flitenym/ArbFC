@@ -16,31 +16,31 @@ namespace Exchange.Common.Services
             _logger = logger;
         }
 
-        public async Task<(bool IsSuccess, string Message, IEnumerable<AssetInfo>)> GetInterceptCurrenciesAsync(IEnumerable<ExchangeBaseService> exchangeServices)
+        public async Task<(bool IsSuccess, string Message, IEnumerable<TickerInfo> TickersInfo)> GetInterceptTickersAsync(IEnumerable<ExchangeBaseService> exchangeServices)
         {
-            List<AssetInfo> assets = new();
+            List<TickerInfo> tickers = new();
 
             foreach (ExchangeBaseService exchangeService in exchangeServices)
             {
-                (bool isSuccessGetCurrencies, string messageGetCurrencies, IEnumerable<AssetInfo> currencies) =
-                    await exchangeService.GetCurrenciesAsync();
+                (bool isSuccessGetTickers, string messageGetTickers, IEnumerable<TickerInfo> tickersInfo) =
+                    await exchangeService.GetTickersAsync();
 
-                if (!isSuccessGetCurrencies)
+                if (!isSuccessGetTickers)
                 {
-                    return (false, messageGetCurrencies, null);
+                    return (false, messageGetTickers, null);
                 }
 
-                if (!assets.Any())
+                if (!tickers.Any())
                 {
-                    assets = currencies.ToList();
+                    tickers = tickersInfo.ToList();
                 }
                 else
                 {
-                    assets = assets.Intersect(currencies).ToList();
+                    tickers = tickers.Intersect(tickersInfo).ToList();
                 }
             }
 
-            return (true, default, assets);
+            return (true, default, tickers);
         }
     }
 }

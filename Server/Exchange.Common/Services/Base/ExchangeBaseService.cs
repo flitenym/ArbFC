@@ -11,6 +11,6 @@ namespace Exchange.Common.Services.Base
         /// Получение валют
         /// </summary>
         /// <returns></returns>
-        public abstract Task<(bool IsSuccess, string Message, IEnumerable<AssetInfo> Currencies)> GetCurrenciesAsync();
+        public abstract Task<(bool IsSuccess, string Message, IEnumerable<TickerInfo> TickersInfo)> GetTickersAsync();
     }
 }

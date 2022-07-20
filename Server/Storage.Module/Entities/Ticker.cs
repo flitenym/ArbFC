@@ -6,7 +6,7 @@ namespace Storage.Module.Entities
     {
         [Key]
         public long Id { get; set; }
-        public string ToAsset { get; set; }
-        public string FromAsset { get; set; }
+        public string ToTicker { get; set; }
+        public string FromTicker { get; set; }
     }
 }

@@ -9,10 +9,11 @@ namespace Storage.Module.Controllers.DTO
     {
         public long UserId { get; set; }
         public IEnumerable<long> ExchangeIds { get; set; }
-        public IEnumerable<AssetInfo> Assets { get; set; }
+        public IEnumerable<TickerInfo> Tickers { get; set; }
         public string SRGB { get; set; }
         public int Difference { get; set; }
         public long TwentyFourHoursVolume { get; set; }
+        public bool IsEnabled { get; set; }
         public long? NotificationSoundId { get; set; }
 
         public (bool IsSuccess, string Message) IsValid()
@@ -27,9 +28,9 @@ namespace Storage.Module.Controllers.DTO
                 return (false, string.Format(StorageLoc.EmptyValue, nameof(ExchangeIds)));
             }
 
-            if (Assets == null)
+            if (Tickers == null)
             {
-                return (false, string.Format(StorageLoc.EmptyValue, nameof(Assets)));
+                return (false, string.Format(StorageLoc.EmptyValue, nameof(Tickers)));
             }
 
             if (string.IsNullOrEmpty(SRGB))
